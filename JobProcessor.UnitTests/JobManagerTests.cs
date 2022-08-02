@@ -4,6 +4,8 @@ using JobProcessor.Data.Enums;
 using JobProcessor.Service.Managers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Moq;
 
 namespace JobProcessor.UnitTests
 {
@@ -19,7 +21,8 @@ namespace JobProcessor.UnitTests
                 options.UseInMemoryDatabase(_dbName);
             });
             var _serviceProvider = _serviceCollection.BuildServiceProvider();
-            var _jobManager = new JobManager(_serviceProvider);
+            var _mockLogger = new Mock<ILogger<JobManager>>();
+            var _jobManager = new JobManager(_serviceProvider, _mockLogger.Object);
 
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(_dbName)
@@ -67,7 +70,8 @@ namespace JobProcessor.UnitTests
                 options.UseInMemoryDatabase(_dbName);
             });
             var _serviceProvider = _serviceCollection.BuildServiceProvider();
-            var _jobManager = new JobManager(_serviceProvider);
+            var _mockLogger = new Mock<ILogger<JobManager>>();
+            var _jobManager = new JobManager(_serviceProvider, _mockLogger.Object);
 
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(_dbName)
@@ -122,7 +126,8 @@ namespace JobProcessor.UnitTests
                 options.UseInMemoryDatabase(_dbName);
             });
             var _serviceProvider = _serviceCollection.BuildServiceProvider();
-            var _jobManager = new JobManager(_serviceProvider);
+            var _mockLogger = new Mock<ILogger<JobManager>>();
+            var _jobManager = new JobManager(_serviceProvider, _mockLogger.Object);
 
             var _options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(_dbName)
@@ -179,7 +184,8 @@ namespace JobProcessor.UnitTests
                 options.UseInMemoryDatabase(_dbName);
             });
             var _serviceProvider = _serviceCollection.BuildServiceProvider();
-            var _jobManager = new JobManager(_serviceProvider);
+            var _mockLogger = new Mock<ILogger<JobManager>>();
+            var _jobManager = new JobManager(_serviceProvider, _mockLogger.Object);
 
             var options = new DbContextOptionsBuilder<DataContext>()
                 .UseInMemoryDatabase(_dbName)

@@ -82,11 +82,11 @@ namespace JobProcessor.Service.BackgroundJobProcessors
             var _stopwatch = new Stopwatch();
             _stopwatch.Start();
 
-            var _updatedJob = SortArrayFromJob(_earliestQueuedJob);
+            var _processedJob = SortArrayFromJob(_earliestQueuedJob);
 
             _stopwatch.Stop();
 
-            _earliestQueuedJob.JobOutput = _updatedJob.JobOutput;
+            _earliestQueuedJob.JobOutput = _processedJob.JobOutput;
             _earliestQueuedJob.JobStatus = JobStatus.Completed;
             _earliestQueuedJob.JobProcessingDurationMiliseconds = _stopwatch.ElapsedMilliseconds;
 
