@@ -40,6 +40,26 @@ namespace JobProcessor.UnitTests
         }
 
         [Fact]
+        public void JobApiReadModelProfile_ShouldMapCorrectly_FromJobToJobApiReadModel()
+        {
+            var _config = new MapperConfiguration(config => config.AddProfile<JobApiReadModelProfile>());
+            var _mapper = _config.CreateMapper();
+
+            var _job = new Job()
+            {
+                JobInput = "8,5,3,9,2,76",
+                JobOutput = "2,3,5,8,9,76",
+                JobStatus = JobStatus.Queued
+            };
+
+            var _jobApiReadModel = _mapper.Map<JobApiReadModel>(_job);
+
+            Assert.Equal(_job.JobInput.Split(',', System.StringSplitOptions.None).Select(int.Parse), _jobApiReadModel.JobInput);
+            Assert.Equal(_job.JobOutput.Split(',', System.StringSplitOptions.None).Select(int.Parse), _jobApiReadModel.JobOutput);
+            Assert.Equal(_job.JobStatus.ToString(), _jobApiReadModel.JobStatus);
+        }
+
+        [Fact]
         public void JobServiceModelProfile_ShouldMapCorrectly_FromJobToJobServiceModel()
         {
             var _config = new MapperConfiguration(config => config.AddProfile<JobServiceModelProfile>());

@@ -8,7 +8,7 @@ namespace JobProcessor.Data.ServiceModels
         public DateTime JobEnqueuedDateTimeUtc { get; set; }
         public long? JobProcessingDurationMiliseconds { get; set; }
         public JobStatus JobStatus { get; set; }
-        public IEnumerable<int>? JobInput { get; set; }
-        public IEnumerable<int>? JobOutput { get; set; }
+        public IEnumerable<int> JobInput { get; set; }
+        public IEnumerable<int> JobOutput { get; set; }
     }
 }

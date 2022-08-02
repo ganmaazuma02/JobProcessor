@@ -3,6 +3,7 @@ using JobProcessor.Service.Interfaces;
 using JobProcessor.Service.Managers;
 using JobProcessor.Service.BackgroundJobProcessors;
 using Microsoft.EntityFrameworkCore;
+using JobProcessor.Service.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IJobManager, JobManager>();
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseInMemoryDatabase("testdb");
+    options.UseInMemoryDatabase("JobProcessorDb");
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHostedService<IntegerArraySortingBackgroundJobProcessor>();
+builder.Services.Configure<BackgroundJobConfig>(
+    builder.Configuration.GetSection(nameof(BackgroundJobConfig)));
+
 
 var app = builder.Build();
 

@@ -1,6 +1,4 @@
-﻿using JobProcessor.Data.Enums;
-
-namespace JobProcessor.API.ApiModels
+﻿namespace JobProcessor.API.ApiModels
 {
     public class JobApiReadModel
     {
